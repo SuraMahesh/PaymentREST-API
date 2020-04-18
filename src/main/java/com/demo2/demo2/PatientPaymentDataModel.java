@@ -4,11 +4,15 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PatientPaymentDataModel {
-
+public abstract class PatientPaymentDataModel implements controller {
+	
+	List<patient_payment_details> pat;
+	
 	Connection con = null;
 	
 	public PatientPaymentDataModel() {
+		
+		
 		String url = "jdbc:mysql://localhost:3306/patientdb";
 		String username = "root";
 		String password = "";
@@ -23,6 +27,10 @@ public class PatientPaymentDataModel {
 			System.out.println("not connected" + e);
 		}
 	}
+	
+	
+	
+	@Override
 	
 	public List<patient_payment_details> getPatient() {
 		List<patient_payment_details> pat = new ArrayList<patient_payment_details>();
@@ -79,6 +87,7 @@ public class PatientPaymentDataModel {
 		
 	}
 	
+	@Override
 	public void createPatient(patient_payment_details pat1) {
 		String sql = "INSERT INTO patients VALUES (?,?,?,?,?)";
 		try {
@@ -120,6 +129,23 @@ public class PatientPaymentDataModel {
 			System.out.println("catch 3 "+e);
 			
 		}
+	}
+	
+	@Override
+	public String deletePatient(String patientId) {
+		String sql = "delete from regHospital where id=?";
+        String output;
+        try {
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, patientId);
+            st.executeUpdate();
+            output = "Successfully Deleted";
+        } catch (SQLException e){
+            System.out.println(e);
+            output = "Error";
+        }
+            return output;
+    }
 	}
 	
 }

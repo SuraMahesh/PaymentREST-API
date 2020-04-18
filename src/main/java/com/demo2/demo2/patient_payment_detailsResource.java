@@ -4,6 +4,7 @@ package com.demo2.demo2;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -55,8 +56,22 @@ public class patient_payment_detailsResource {
 	public patient_payment_details Upadte(patient_payment_details pat1)
 	{
 		System.out.println("Patient Update API Called");
+		System.out.println(pat1);
+		if(patRepo.getPatient(pat1.getPatientId()).getPatientId()==0) {
+			patRepo.createPatient(pat1);
+		}
+		else {
 		patRepo.updatePatient(pat1);
+		}
 		
 		return pat1;
+	}
+	
+	@DELETE
+	@Path("patient/{patientId}")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String deletePaient(@PathParam("patientId") String patientId) {
+		patient_payment_details pat = patRepo.getPatient(patientId);
+		return patRepo.deletePatient(patientId);
 	}
 }

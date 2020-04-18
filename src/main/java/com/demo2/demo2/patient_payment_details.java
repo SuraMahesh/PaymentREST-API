@@ -14,6 +14,8 @@ public class patient_payment_details {
 	private Date validDate;
 	private int cvcCode;
 	
+	public patient_payment_details(){}
+	
 	
 	public String getPatientId() {
 		return patientId;
@@ -44,6 +46,15 @@ public class patient_payment_details {
 	}
 	public void setCvcCode(int cvcCode) {
 		this.cvcCode = cvcCode;
+	}
+	
+	@Override
+	public String toString() {
+		return "patient_payment_details{" + 
+				"patientId=" + patientId +
+				", cardNumber='" + cardNumber + '\'' +
+				", nameOfTheCard='" + nameOfTheCard + '\'' +
+				'}';
 	}
 	
 	
