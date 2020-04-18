@@ -16,7 +16,7 @@ public class DBconnection {
 
         if(con==null ||con.isClosed()) {
 
-            String url = "jdbc:mysql://127.0.0.1:3306/healthcare";
+            String url = "jdbc:mysql://localhost:3306/patientdb";
             String username = "root";
             String password = "";
             try {

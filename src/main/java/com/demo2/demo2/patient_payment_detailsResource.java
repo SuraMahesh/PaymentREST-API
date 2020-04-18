@@ -13,7 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("patient")
+@Path("patients")
 public class patient_payment_detailsResource {
 	
 	PatientPaymentDataModel patRepo = new PatientPaymentDataModel();
@@ -57,21 +57,26 @@ public class patient_payment_detailsResource {
 	{
 		System.out.println("Patient Update API Called");
 		System.out.println(pat1);
-		if(patRepo.getPatient(pat1.getPatientId()).getPatientId()==0) {
-			patRepo.createPatient(pat1);
-		}
-		else {
+		//if(patRepo.getPatient(pat1.getPatientId()).getPatientId()==0) {
+			//patRepo.createPatient(pat1);
+		//}
+		//else {
 		patRepo.updatePatient(pat1);
-		}
+		//}
 		
 		return pat1;
 	}
 	
 	@DELETE
 	@Path("patient/{patientId}")
-	@Produces(MediaType.TEXT_PLAIN)
-	public String deletePaient(@PathParam("patientId") String patientId) {
-		patient_payment_details pat = patRepo.getPatient(patientId);
-		return patRepo.deletePatient(patientId);
+	public patient_payment_details deletePatient(@PathParam("patientId") String patientId)
+	{
+		System.out.println("Patient Delete API Called");
+		patient_payment_details del_pat = patRepo.getPatient(patientId);
+		patRepo.deletePatient(patientId);
+		if (del_pat.getPatientId() != "") {
+			patRepo.deletePatient(patientId);
+		}
+		return del_pat;
 	}
 }

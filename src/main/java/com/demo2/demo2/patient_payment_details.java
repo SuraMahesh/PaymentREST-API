@@ -54,6 +54,8 @@ public class patient_payment_details {
 				"patientId=" + patientId +
 				", cardNumber='" + cardNumber + '\'' +
 				", nameOfTheCard='" + nameOfTheCard + '\'' +
+				", validDate='" + validDate + '\'' + 
+				", cvcCode='" + cvcCode + '\'' + 
 				'}';
 	}
 	

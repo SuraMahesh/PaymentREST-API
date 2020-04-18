@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class PatientPaymentDataModel implements controller {
+public class PatientPaymentDataModel  {
 	
 	List<patient_payment_details> pat;
 	
@@ -30,7 +30,6 @@ public abstract class PatientPaymentDataModel implements controller {
 	
 	
 	
-	@Override
 	
 	public List<patient_payment_details> getPatient() {
 		List<patient_payment_details> pat = new ArrayList<patient_payment_details>();
@@ -87,7 +86,7 @@ public abstract class PatientPaymentDataModel implements controller {
 		
 	}
 	
-	@Override
+	
 	public void createPatient(patient_payment_details pat1) {
 		String sql = "INSERT INTO patients VALUES (?,?,?,?,?)";
 		try {
@@ -112,7 +111,7 @@ public abstract class PatientPaymentDataModel implements controller {
 		
 	public void updatePatient(patient_payment_details pat1) {
 		String sql = "UPDATE patient set patientId=? , cardNumber=?, nameOfTheCard=?, validDate=?, cvcCode=?";
-		
+		String output;
 		try {
 			PreparedStatement st = con.prepareStatement(sql);
 			
@@ -122,7 +121,9 @@ public abstract class PatientPaymentDataModel implements controller {
 			st.setDate(4, (Date) pat1.getValidDate());
 			st.setInt(5, pat1.getCvcCode());
 			
+			
 			st.executeUpdate();
+			output = "Successfuly update";
 			
 		}catch(Exception e){
 			
@@ -131,7 +132,7 @@ public abstract class PatientPaymentDataModel implements controller {
 		}
 	}
 	
-	@Override
+	
 	public String deletePatient(String patientId) {
 		String sql = "delete from regHospital where id=?";
         String output;
