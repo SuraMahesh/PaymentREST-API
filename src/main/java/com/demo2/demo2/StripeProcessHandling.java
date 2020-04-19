@@ -16,7 +16,7 @@ public class StripeProcessHandling {
 
 	public String createUser(String cemail, String cname) {
 		
-		com.stripe.pay_stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
 		
 		try {
 			
@@ -37,7 +37,7 @@ public class StripeProcessHandling {
 	
 	public String addCardtoUser(String userId, String number, String exp_month, String exp_year, String cvc)  {
 		
-		com.stripe.pay_stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
 		try {
 		Customer customer1 = Customer.retrieve(userId);
 		System.out.println(customer1.getId());
@@ -58,7 +58,6 @@ public class StripeProcessHandling {
 		source.put("source", token.getId());
 		
 		System.out.println(token.getId());
-		//String source = token.getId()
 		customer1.getSources().create(source);
 		
 		output2 = "Card added to";
@@ -72,7 +71,7 @@ public class StripeProcessHandling {
 	}
 
 	public String payCharge(String cusId, String amount) {
-		com.stripe.pay_stripe.apiKey  = "STRIPE_API_KEY";
+		com.stripe.Stripe.apiKey  = "STRIPE_API_KEY";
 		
 		try {
 		Customer customer1 = Customer.retrieve(cusId);
